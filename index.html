@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+<div class="app">
+    <canvas id="canvas" width="875" height="300"></canvas>
+    <input id="input1" type="text">
+</div>
+<script>
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+    let promise = new Promise((resolve) => {
+        const img = document.createElement('img');
+        img.onload = () => {
+            resolve(img)
+        };
+        img.src = 'sprite.png'
+    });
+    promise.then((img) => {
+        ctx.drawImage(img, 0, canvas.height - 83);
+        ctx.beginPath()
+//        ctx.moveTo(36, 235)
+//        ctx.lineTo(36+39, 235)
+        drawArc(ctx, 0, 4)
+        drawArc(ctx, 4, 6)
+        ctx.lineWidth = 3;
+        ctx.strokeStyle = "black";
+        ctx.stroke();
+
+
+    });
+    canvas.addEventListener('click', (event) => {
+        console.log(event.clientX, event.clientY)
+        console.dir(canvas)
+    })
+
+    function drawArc(ctx, numStart, numEnd) {
+        ctx.arc(((numEnd - numStart) / 2 + numStart) * 39 + 36, ctx.canvas.height - 65, (numEnd - numStart)/2 * 39, Math.PI, 0, false);
+//        console.log(((numEnd - numStart) / 2 + numStart) * 39 + 34, ctx.canvas.height - 60,)
+
+        const input1 = document.getElementById('input1');
+
+        input1.style.position = 'absolute';
+        console.log(canvas.clientTop+(canvas.height-65-(numEnd - numStart)/2 * 39))
+        console.log(canvas.clientLeft+(((numEnd - numStart) / 2 + numStart) * 39 + 36))
+        input1.style.top =  canvas.clientTop+(canvas.height-65-(numEnd - numStart)/2 * 39)-20+'px';
+        input1.style.left = canvas.clientLeft+(((numEnd - numStart) / 2 + numStart) * 39 + 36)+'px';
+        input1.size = 1;
+    }
+
+
+
+    // 0 - 34
+    // 1 - 73   39   60
+    // 2 - 112  39
+    // 3 - 151  39
+    // 4 - 190  39
+
+
+</script>
+
+</body>
+</html>
