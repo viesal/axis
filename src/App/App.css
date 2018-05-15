@@ -1,0 +1,25 @@
+.erroreInput{
+    color: #f00;
+    outline-color: #f00;
+}
+.clearInput{
+    border: 0;
+    outline: 0;
+}
+
+.erroreNumber{
+    background-color: #FF0;
+}
+
+.task{
+    text-align: center;
+}
+
+.task span, .task input{
+    font-size: 2em;
+    font-weight: bold;
+}
+
+.input{
+    font-size: 1.5em;
+}
