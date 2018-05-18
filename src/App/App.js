@@ -42,13 +42,13 @@ export class App {
         addElementEventListener(this.inputOne, 'input', (event) => {
             inputText(event, this.termOne, () => {
                 this.canvas.promise.then(() => {
-                    this.canvas.drawArc(numOne, numOne + numTwo, this.inputTwo, 'green')
+                    this.canvas.drawArc(numOne, numOne + numTwo, this.inputTwo)
                 });
             });
         });
 
         this.inputTwo = document.createElement('input');
-        this.inputTwo.classList.add('input')
+        this.inputTwo.classList.add('input');
         this.inputTwo.style.position = 'absolute';
         this.inputTwo.size = 1;
         addElementEventListener(this.inputTwo, 'input', (event) => {
@@ -58,7 +58,7 @@ export class App {
         });
 
         this.canvas.promise.then(() => {
-            this.canvas.drawArc(0, numOne, this.inputOne, 'red')
+            this.canvas.drawArc(0, numOne, this.inputOne)
         });
 
     }

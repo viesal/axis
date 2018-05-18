@@ -86,8 +86,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 window.onload = () => {
-    const x = prompt('Введите первое число в диапазоне от 6 до 9', '6');
-    const y = prompt('Введите второе число в диапазоне от 3 до 8', '3');
+    const x = Math.round(5.5 + Math.random() * 4);
+    const y = Math.round(2.5 + Math.random() * 6);
     new __WEBPACK_IMPORTED_MODULE_0__App_App__["a" /* App */](document.body, Number(x), Number(y));
 };
 
@@ -146,7 +146,7 @@ class App {
         Object(__WEBPACK_IMPORTED_MODULE_3__utils_addElementEventListener__["a" /* addElementEventListener */])(this.inputOne, 'input', event => {
             Object(__WEBPACK_IMPORTED_MODULE_2__utils_field2Text__["a" /* inputText */])(event, this.termOne, () => {
                 this.canvas.promise.then(() => {
-                    this.canvas.drawArc(numOne, numOne + numTwo, this.inputTwo, 'green');
+                    this.canvas.drawArc(numOne, numOne + numTwo, this.inputTwo);
                 });
             });
         });
@@ -162,7 +162,7 @@ class App {
         });
 
         this.canvas.promise.then(() => {
-            this.canvas.drawArc(0, numOne, this.inputOne, 'red');
+            this.canvas.drawArc(0, numOne, this.inputOne);
         });
     }
 }
@@ -183,7 +183,6 @@ class App {
 class Canvas {
     constructor(container) {
         this.container = container;
-        // this.app = createElement(this.container, 'div')
         this.canvas = Object(__WEBPACK_IMPORTED_MODULE_0__utils_createElement__["a" /* createElement */])(this.container, 'canvas');
         this.canvas.width = '875';
         this.canvas.height = '300';
@@ -202,15 +201,34 @@ class Canvas {
         });
     }
 
-    drawArc(numStart, numEnd, input, colorLine) {
+    drawArc(numStart, numEnd, input) {
         this.ctx.beginPath();
-        this.ctx.arc(((numEnd - numStart) / 2 + numStart) * 39 + 36, this.ctx.canvas.height - 63, (numEnd - numStart) / 2 * 39, Math.PI, 0, false);
-        this.ctx.lineWidth = 3;
-        this.ctx.strokeStyle = colorLine;
+
+        const x0 = numStart * 39 + 36;
+
+        const x = numEnd * 39 + 36;
+        const y = this.ctx.canvas.height - 63;
+
+        const cp1x = (numEnd - numStart) / 8 * 39 * 1.5 + numStart * 39 + 36;
+        const cp2x = (numEnd - numStart) / 8 * 39 * 6.5 + numStart * 39 + 36;
+        const cp1y = this.ctx.canvas.height - 63 - (numEnd - numStart) * 39 / 3;
+
+        this.ctx.moveTo(x0, y);
+
+        // this.ctx.fillRect(cp1x, cp1y, 2, 2)
+        // this.ctx.fillRect(cp2x, cp1y, 2, 2)
+
+        this.ctx.bezierCurveTo(cp1x, cp1y, cp2x, cp1y, x, y);
+
+        // this.ctx.lineTo( )
+
+        // this.ctx.arc(((numEnd - numStart) / 2 + numStart) * 39 + 36, this.ctx.canvas.height - 63, (numEnd - numStart) / 2 * 39, Math.PI, 0, false);
+        this.ctx.lineWidth = 2;
+        this.ctx.strokeStyle = '#db7093';
         this.ctx.stroke();
 
         this.container.appendChild(input);
-        input.style.top = this.canvas.clientTop + (this.canvas.height - 63 - (numEnd - numStart) / 2 * 39) - 20 + 'px';
+        input.style.top = this.canvas.clientTop + cp1y + 'px';
         input.style.left = this.canvas.clientLeft + (((numEnd - numStart) / 2 + numStart) * 39 + 36) + 'px';
     }
 
