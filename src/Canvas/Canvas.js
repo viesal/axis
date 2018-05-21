@@ -34,9 +34,9 @@ export class Canvas {
         this.ctx.moveTo(x0, y);
         this.ctx.bezierCurveTo(cp1x, cp1y, cp2x, cp1y, x, y);
         this.ctx.moveTo(x, y);
-        this.ctx.lineTo(x - 15, y - 10)
+        this.ctx.lineTo(x - 15, y - 10);
         this.ctx.moveTo(x, y);
-        this.ctx.lineTo(x - 2, y - 17)
+        this.ctx.lineTo(x - 2, y - 17);
         this.ctx.lineWidth = 2;
         this.ctx.strokeStyle = '#db7093';
         this.ctx.stroke();

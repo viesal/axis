@@ -36,7 +36,7 @@ export class App {
         this.canvas = new Canvas(this.app);
 
         this.inputOne = document.createElement('input');
-        this.inputOne.classList.add('input')
+        this.inputOne.classList.add('input');
         this.inputOne.style.position = 'absolute';
         this.inputOne.size = 1;
         addElementEventListener(this.inputOne, 'input', (event) => {
