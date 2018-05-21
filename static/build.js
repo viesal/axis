@@ -87,7 +87,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 window.onload = () => {
     const x = Math.round(5.5 + Math.random() * 4);
-    const y = Math.round(2.5 + Math.random() * 6);
+    const y = Math.round(10.5 - x + Math.random() * 4);
     new __WEBPACK_IMPORTED_MODULE_0__App_App__["a" /* App */](document.body, Number(x), Number(y));
 };
 
